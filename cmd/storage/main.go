@@ -1,17 +1,19 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"log"
 	"net"
 	"strconv"
 
+	"h12.io/msa"
+	"h12.io/msa/db/memdb"
+	"h12.io/msa/proto"
+	"h12.io/msa/service"
+	"h12.io/msa/service/storage"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-	"github.com/h12w/msa"
-	"github.com/h12w/msa/db/memdb"
-	"github.com/h12w/msa/proto"
-	"github.com/h12w/msa/service/storage"
 )
 
 type config struct {
@@ -39,6 +41,11 @@ func run(cfg *config) error {
 	server := grpc.NewServer()
 	proto.RegisterStorageServer(server, storage.NewService(db))
 	reflection.Register(server)
+
+	service.NotifyStop(func(context.Context) error {
+		server.GracefulStop()
+		return nil
+	})
 
 	return server.Serve(lis)
 }

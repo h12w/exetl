@@ -5,7 +5,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/h12w/msa/proto"
+	"h12.io/msa/proto"
 )
 
 type processError struct {

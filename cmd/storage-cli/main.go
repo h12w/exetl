@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
-	"github.com/h12w/msa"
-	"github.com/h12w/msa/proto"
+	"h12.io/msa"
+	"h12.io/msa/proto"
 )
 
 type config struct {

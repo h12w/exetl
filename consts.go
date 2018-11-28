@@ -10,6 +10,6 @@ const (
 
 // default ports of gRPC services
 const (
-	StorageDefaultPort = 9000 + iota
-	IngesterDefaultPort
+	StorageDefaultPort  = 9100
+	IngesterDefaultPort = 9101
 )

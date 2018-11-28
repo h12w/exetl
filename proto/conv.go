@@ -1,6 +1,6 @@
 package proto
 
-import "github.com/h12w/msa"
+import "h12.io/msa"
 
 // ToDomain converts from proto buffer type to domain type
 func (r *Record) ToDomain() msa.Record {

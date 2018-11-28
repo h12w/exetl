@@ -6,7 +6,7 @@ import (
 	"log"
 	"sync"
 
-	"github.com/h12w/msa"
+	"h12.io/msa"
 )
 
 type (

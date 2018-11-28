@@ -8,9 +8,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/h12w/msa"
-	"github.com/h12w/msa/proto"
-	"github.com/h12w/msa/service/ingester"
+	"h12.io/msa"
+	"h12.io/msa/proto"
+	"h12.io/msa/service"
+	"h12.io/msa/service/ingester"
 	"google.golang.org/grpc"
 )
 
@@ -42,12 +43,13 @@ func run(cfg *config) error {
 	}
 	defer storageConn.Close()
 
-	s := &http.Server{
+	server := &http.Server{
 		Addr:           cfg.Host,
 		Handler:        ingester.NewService(proto.NewStorageClient(storageConn), cfg.Batch),
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
-	return s.ListenAndServe()
+	service.NotifyStop(server.Shutdown)
+	return server.ListenAndServe()
 }

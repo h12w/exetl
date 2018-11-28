@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/h12w/msa"
+	"h12.io/msa"
 
-	"github.com/h12w/msa/proto"
+	"h12.io/msa/proto"
 )
 
 // Service implements an HTTP service that ingest CSV files and upsert into backend storage
@@ -23,7 +23,7 @@ func NewService(storage proto.StorageClient, batchSize int) *Service {
 	return &Service{storage: storage, batchSize: batchSize}
 }
 
-// ServeHTTP
+// ServeHTTP implements http.Handler
 func (s *Service) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	q := req.URL.Query()
 	table := q.Get("table")
@@ -31,7 +31,11 @@ func (s *Service) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	for _, key := range strings.Split(q.Get("keys"), ",") {
 		keyNames[key] = true
 	}
-	// TODO: provide a parameter to select some of the fields
+	/*
+		TODO:
+		* a parameter to select some of the fields
+		* parameters to specify a clean method for a field, e.g. phone number
+	*/
 
 	if err := readCSV(req.Body, keyNames, s.batchSize, func(records []*proto.Record) error {
 		return s.upsert(req.Context(), table, records)

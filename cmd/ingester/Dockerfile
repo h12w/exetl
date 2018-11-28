@@ -1,6 +1,6 @@
 FROM golang:1.11
 
-RUN go install github.com/h12w/msa/cmd/ingester
+RUN go get h12.io/msa/cmd/ingester
 
 CMD ["/go/bin/ingester"]
-EXPOSE 9001
+EXPOSE 9101

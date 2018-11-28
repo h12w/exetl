@@ -1,6 +1,6 @@
 FROM golang:1.11
 
-RUN go install github.com/h12w/msa/cmd/storage
+RUN go get h12.io/msa/cmd/storage
 
 CMD ["/go/bin/storage"]
-EXPOSE 9000
+EXPOSE 9100

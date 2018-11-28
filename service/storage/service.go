@@ -3,8 +3,8 @@ package storage
 import (
 	"context"
 
-	"github.com/h12w/msa"
-	"github.com/h12w/msa/proto"
+	"h12.io/msa"
+	"h12.io/msa/proto"
 )
 
 // Service implements the storage gRPC service

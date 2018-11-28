@@ -3,7 +3,29 @@ msa: micro service assignment
 
 MSA provides a general purpose CSV file ingester that supports multiple backend storages.
 
-## Code Layout
+## Install
+
+```bash
+go get h12.io/msa
+```
+
+## Testing
+
+```bash
+make test
+```
+
+
+### Start with docker-compose
+
+```bash
+docker-compose build --no-cache
+docker-compose up --detach
+```
+
+## Design
+
+### Code layout
 
 ```
 msa/ all domain types and constants that are needed by interactions between its sub-packages
@@ -18,23 +40,4 @@ msa/ all domain types and constants that are needed by interactions between its 
         storage/ storage service logic
         iingester/ ingester service logic
     testdata/  data for testing
-```
-
-## Install
-
-```bash
-go get github.com/h12w/msa
-```
-
-## Testing
-
-```bash
-make test
-```
-
-
-### Docker setup
-
-```bash
-docker-compose up
 ```
