@@ -10,9 +10,9 @@ import (
 
 func TestReadCSV(t *testing.T) {
 	csvText := `
-id name
-1 a 
-2 b
+id,name
+1,a 
+2,b
 `
 	records := []*proto.Record{
 		{
@@ -50,10 +50,12 @@ id name
 	}
 
 	recs := []*proto.Record{}
-	readCSV(strings.NewReader(csvText), map[string]bool{"id": true}, 10, func(records []*proto.Record) error {
+	if err := readCSV(strings.NewReader(csvText), map[string]bool{"id": true}, 10, func(records []*proto.Record) error {
 		recs = append(recs, records...)
 		return nil
-	})
+	}); err != nil {
+		t.Fatal(err)
+	}
 	if reflect.DeepEqual(recs, records) {
 		t.Fatalf("expect %v got %v", records, recs)
 	}
