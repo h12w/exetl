@@ -47,11 +47,18 @@ func readCSV(csvFile io.Reader, keyNames map[string]bool, batchSize int, process
 		keys := []string{}
 		fields := make([]*proto.Field, 0, len(csvRecord))
 		for i, value := range csvRecord {
+			name := header[i]
+			// TODO: replace the hard coded condition with a well designed specification passed in
+			if name == "mobile_number" {
+				value = cleanMobileNumber(value)
+			}
+
 			if isKey[i] {
 				keys = append(keys, value)
 			}
+
 			fields = append(fields, &proto.Field{
-				Name:  header[i],
+				Name:  name,
 				Value: value,
 			})
 		}
@@ -82,4 +89,16 @@ func readCSV(csvFile io.Reader, keyNames map[string]bool, batchSize int, process
 	}
 
 	return nil
+}
+
+func cleanMobileNumber(s string) string {
+	b := strings.Builder{}
+	for _, c := range s {
+		switch c {
+		case ' ', '(', ')':
+		default:
+			b.WriteRune(c)
+		}
+	}
+	return b.String()
 }

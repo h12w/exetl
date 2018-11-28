@@ -31,11 +31,9 @@ func (s *Service) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	for _, key := range strings.Split(q.Get("keys"), ",") {
 		keyNames[key] = true
 	}
-	/*
-		TODO:
-		* a parameter to select some of the fields
-		* parameters to specify a clean method for a field, e.g. phone number
-	*/
+	// TODO:
+	// * a parameter to select some of the fields
+	// * a parameter to add extra key value pair, e.g. countrycode=+44
 
 	if err := readCSV(req.Body, keyNames, s.batchSize, func(records []*proto.Record) error {
 		return s.upsert(req.Context(), table, records)
