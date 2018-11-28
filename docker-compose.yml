@@ -1,0 +1,29 @@
+version: '2'
+services:
+  storage-server:
+    build:
+      context: cmd/storage
+      dockerfile: "Dockerfile"
+    ports:
+      - "9000:9000"
+    environment:
+      - PORT=9000
+
+  ingester-server:
+    build:
+      context: cmd/ingester
+      dockerfile: "Dockerfile"
+    ports:
+      - "9000:9000"
+    environment:
+      - PORT=9000
+      - STORAGE_HOST=storage-server
+
+  storage-client:
+    build:
+      context: .
+      dockerfile: "Dockerfile"
+    environment:
+    - PORT=3000
+    - SERVER_HOST=storage-server
+    - SERVICE_TYPE=client

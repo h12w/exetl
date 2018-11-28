@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package proto;
+
+service Storage {
+  rpc Upsert(UpsertRequest) returns (UpsertReply) {}
+}
+
+message UpsertRequest {
+  string table            = 1;
+  repeated Record records = 2;
+}
+
+message Record {
+  Field key             = 1;
+  repeated Field fields = 2;
+}
+
+message Field {
+  string name  = 1;
+  string value = 2;
+}
+
+message UpsertReply {
+  int32  code = 1;
+  string msg  = 2;
+}
