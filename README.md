@@ -5,6 +5,7 @@ MSA provides a general purpose CSV file ingester that supports multiple backend 
 
 ## Code Layout
 
+```
 msa/ all domain types and constants that are needed by interactions between its sub-packages
     cmd/ contain all main packages of services or cli
         storage/ storage service
@@ -17,6 +18,7 @@ msa/ all domain types and constants that are needed by interactions between its 
         storage/ storage service logic
         iingester/ ingester service logic
     testdata/  data for testing
+```
 
 ## Install
 
