@@ -5,7 +5,7 @@ import (
 	"io"
 	"strings"
 
-	"h12.io/msa/proto"
+	"h12.io/exetl/proto"
 )
 
 type processError struct {

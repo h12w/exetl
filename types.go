@@ -1,4 +1,4 @@
-package msa
+package exetl
 
 // DB related type definitions
 type (

@@ -1,12 +1,12 @@
-msa: micro service assignment
-=============================
+exetl: an excercise of ETL service
+==================================
 
 MSA provides a general purpose CSV file ingester that supports multiple backend storages.
 
 ## Install
 
 ```bash
-go get h12.io/msa
+go get h12.io/exetl
 ```
 
 ## Testing
@@ -28,13 +28,13 @@ docker-compose up --detach
 ### Code layout
 
 ```
-msa/ all domain types and constants that are needed by interactions between its sub-packages
+exetl/ all domain types and constants that are needed by interactions between its sub-packages
     cmd/ contain all main packages of services or cli
         storage/ storage service
         ingester/ ingester service
         storage-cli/  a cli tool for storage service
         ingester-cli/ a cli tool for ingester service  
-    db/memdb an in-memory implementation of msa.DB interface
+    db/memdb an in-memory implementation of exetl.DB interface
     proto/ gRPC generated code and utility functions
     service/ contain logic of all services
         storage/ storage service logic

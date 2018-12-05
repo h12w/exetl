@@ -4,10 +4,10 @@ import (
 	"context"
 	"sync"
 
-	"h12.io/msa"
+	"h12.io/exetl"
 
 	"google.golang.org/grpc"
-	"h12.io/msa/proto"
+	"h12.io/exetl/proto"
 )
 
 type fakeStorageClient struct {
@@ -23,5 +23,5 @@ func (c *fakeStorageClient) Upsert(ctx context.Context, in *proto.UpsertRequest,
 		return nil, c.err
 	}
 	c.reqs = append(c.reqs, in)
-	return &proto.UpsertReply{Code: msa.ReplyOK}, nil
+	return &proto.UpsertReply{Code: exetl.ReplyOK}, nil
 }

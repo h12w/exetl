@@ -10,7 +10,7 @@ import (
 	"os"
 	"strconv"
 
-	"h12.io/msa"
+	"h12.io/exetl"
 )
 
 type config struct {
@@ -22,7 +22,7 @@ type config struct {
 
 func main() {
 	cfg := &config{}
-	flag.StringVar(&cfg.Host, "host", "127.0.0.1:"+strconv.Itoa(msa.IngesterDefaultPort), "host of the storage service")
+	flag.StringVar(&cfg.Host, "host", "127.0.0.1:"+strconv.Itoa(exetl.IngesterDefaultPort), "host of the storage service")
 	flag.StringVar(&cfg.Table, "table", "test", "table to be upserted")
 	flag.StringVar(&cfg.File, "file", "", "filename of CSV file")
 	flag.StringVar(&cfg.Keys, "keys", "", "comma separated key list of the CSV file")

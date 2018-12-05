@@ -1,4 +1,4 @@
-// Package memdb provides a pure memory implementation of msa.DB interface
+// Package memdb provides a pure memory implementation of exetl.DB interface
 package memdb
 
 import (
@@ -6,11 +6,11 @@ import (
 	"log"
 	"sync"
 
-	"h12.io/msa"
+	"h12.io/exetl"
 )
 
 type (
-	// MemDB is a pure memory implementation of msa.DB interface
+	// MemDB is a pure memory implementation of exetl.DB interface
 	MemDB struct {
 		tables map[string]*table
 		mu     sync.RWMutex
@@ -18,7 +18,7 @@ type (
 
 	table struct {
 		name    string
-		records map[string]msa.Record
+		records map[string]exetl.Record
 		mu      sync.RWMutex
 	}
 )
@@ -30,8 +30,8 @@ func New() *MemDB {
 	}
 }
 
-// Upsert satisfies msa.DB.Upsert
-func (db *MemDB) Upsert(tableName string, records []msa.Record) error {
+// Upsert satisfies exetl.DB.Upsert
+func (db *MemDB) Upsert(tableName string, records []exetl.Record) error {
 	db.mu.Lock()
 	table, ok := db.tables[tableName]
 	if !ok {
@@ -45,11 +45,11 @@ func (db *MemDB) Upsert(tableName string, records []msa.Record) error {
 func newTable(name string) *table {
 	return &table{
 		name:    name,
-		records: make(map[string]msa.Record),
+		records: make(map[string]exetl.Record),
 	}
 }
 
-func (t *table) upsert(records []msa.Record) error {
+func (t *table) upsert(records []exetl.Record) error {
 	t.mu.Lock()
 	for _, record := range records {
 		t.records[fmt.Sprint(record.Key.Value)] = record

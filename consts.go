@@ -1,4 +1,4 @@
-package msa
+package exetl
 
 // gRPC reply code
 const (

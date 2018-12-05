@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"h12.io/msa"
+	"h12.io/exetl"
 
-	"h12.io/msa/proto"
+	"h12.io/exetl/proto"
 )
 
 // Service implements an HTTP service that ingest CSV files and upsert into backend storage
@@ -57,7 +57,7 @@ func (s *Service) upsert(ctx context.Context, table string, records []*proto.Rec
 	if err != nil {
 		return err
 	}
-	if resp.Code != msa.ReplyOK {
+	if resp.Code != exetl.ReplyOK {
 		return errors.New(resp.Msg)
 	}
 	return nil

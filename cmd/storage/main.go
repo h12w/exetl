@@ -7,11 +7,11 @@ import (
 	"net"
 	"strconv"
 
-	"h12.io/msa"
-	"h12.io/msa/db/memdb"
-	"h12.io/msa/proto"
-	"h12.io/msa/service"
-	"h12.io/msa/service/storage"
+	"h12.io/exetl"
+	"h12.io/exetl/db/memdb"
+	"h12.io/exetl/proto"
+	"h12.io/exetl/service"
+	"h12.io/exetl/service/storage"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -22,7 +22,7 @@ type config struct {
 
 func main() {
 	cfg := &config{}
-	flag.StringVar(&cfg.Host, "host", ":"+strconv.Itoa(msa.StorageDefaultPort), "host of the storage service")
+	flag.StringVar(&cfg.Host, "host", ":"+strconv.Itoa(exetl.StorageDefaultPort), "host of the storage service")
 	flag.Parse()
 	if err := run(cfg); err != nil {
 		log.Fatal(err)

@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"h12.io/msa/proto"
+	"h12.io/exetl/proto"
 )
 
 func TestReadCSV(t *testing.T) {

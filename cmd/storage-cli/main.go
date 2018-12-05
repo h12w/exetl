@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
-	"h12.io/msa"
-	"h12.io/msa/proto"
+	"h12.io/exetl"
+	"h12.io/exetl/proto"
 )
 
 type config struct {
@@ -22,7 +22,7 @@ type config struct {
 
 func main() {
 	cfg := &config{}
-	flag.StringVar(&cfg.Host, "host", "127.0.0.1:"+strconv.Itoa(msa.StorageDefaultPort), "host of the storage service")
+	flag.StringVar(&cfg.Host, "host", "127.0.0.1:"+strconv.Itoa(exetl.StorageDefaultPort), "host of the storage service")
 	flag.StringVar(&cfg.Table, "table", "test", "table to be upserted")
 	flag.Parse()
 
@@ -60,7 +60,7 @@ func run(cfg *config) error {
 	if err != nil {
 		return err
 	}
-	if r.Code != msa.ReplyOK {
+	if r.Code != exetl.ReplyOK {
 		return errors.New(r.GetMsg())
 	}
 	return nil

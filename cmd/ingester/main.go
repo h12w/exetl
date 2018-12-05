@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"time"
 
-	"h12.io/msa"
-	"h12.io/msa/proto"
-	"h12.io/msa/service"
-	"h12.io/msa/service/ingester"
+	"h12.io/exetl"
+	"h12.io/exetl/proto"
+	"h12.io/exetl/service"
+	"h12.io/exetl/service/ingester"
 	"google.golang.org/grpc"
 )
 
@@ -25,9 +25,9 @@ func main() {
 	cfg := &config{}
 	defaultStorageHost := os.Getenv("STORAGE_HOST")
 	if defaultStorageHost == "" {
-		defaultStorageHost = ":" + strconv.Itoa(msa.StorageDefaultPort)
+		defaultStorageHost = ":" + strconv.Itoa(exetl.StorageDefaultPort)
 	}
-	flag.StringVar(&cfg.Host, "host", ":"+strconv.Itoa(msa.IngesterDefaultPort), "host of the ingester service")
+	flag.StringVar(&cfg.Host, "host", ":"+strconv.Itoa(exetl.IngesterDefaultPort), "host of the ingester service")
 	flag.StringVar(&cfg.Storage, "storage", defaultStorageHost, "host of the storage service")
 	flag.IntVar(&cfg.Batch, "batch", 100, "processing batch size")
 	flag.Parse()
